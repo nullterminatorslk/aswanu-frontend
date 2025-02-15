@@ -8,6 +8,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import ChatBot from "@/components/Chatbot";
 
 const font = Inter({ subsets: ["latin-ext"] });
 
@@ -53,6 +54,7 @@ export default async function RootLayout({
             <Navbar />
 
             <div className="min-h-screen">{children}</div>
+            <ChatBot />
             <Footer />
           </CurrentFocusedSectionProvider>
 

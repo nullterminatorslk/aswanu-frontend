@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardDescription,
+} from "@/components/ui/card";
 import {
   Plus,
   TrendingUp,
@@ -11,8 +17,21 @@ import {
   ChevronDown,
   Truck,
   AlertCircle,
+  AlertTriangle,
 } from "lucide-react";
 import Link from "next/link";
+import FarmerAlertForm from "./Alert";
+
+import { ScrollArea } from "@radix-ui/react-scroll-area";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import { Button } from "./ui/button";
 
 const FarmerDashboard = () => {
   const [selectedBids, setSelectedBids] = useState({});
@@ -256,6 +275,39 @@ const FarmerDashboard = () => {
           </Card>
         ))}
       </div>
+
+      <Card className="my-10 max-w-xl">
+        <CardHeader>
+          <CardTitle>
+            <span className="text-red-500">Submit Pest Alert</span>
+          </CardTitle>
+          <CardDescription className="mt-10">
+            Alert other farmers in your area about pest infestations
+          </CardDescription>
+
+          <Dialog modal>
+            <DialogTrigger asChild>
+              <Button variant="destructive">Submit Alert</Button>
+            </DialogTrigger>
+
+            <DialogContent className="max-w-xl max-h-screen">
+              <DialogHeader>
+                <div className="flex items-center gap-2">
+                  <AlertTriangle className="h-6 w-6 text-red-500" />
+                  <DialogTitle>Submit Pest Alert</DialogTitle>
+                </div>
+                <DialogDescription>
+                  Alert other farmers in your area about pest infestations
+                </DialogDescription>
+              </DialogHeader>
+
+              <ScrollArea className="h-screen">
+                <FarmerAlertForm />
+              </ScrollArea>
+            </DialogContent>
+          </Dialog>
+        </CardHeader>
+      </Card>
     </div>
   );
 };
