@@ -1,17 +1,12 @@
-import {
-  BadgeCheck,
-  Star,
-  Calendar,
-  TrendingUp,
-  ShoppingCart,
-} from "lucide-react";
+import { BadgeCheck, Calendar, ShoppingCart, Star } from "lucide-react";
+import Image from "next/image";
 import { FC } from "react";
+import PlaceBidButton from "./PlaceBidModal";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
-import Image from "next/image";
 
-type ListingItem = {
+export type ListingItem = {
   id: number;
   type: string;
   category?: string; // Only for harvests
@@ -106,9 +101,7 @@ const AuctionCard: FC<AuctionCardProps> = ({ item }) => {
 
         <div className="flex justify-between items-center">
           {item.category === "future" ? (
-            <Button variant="default">
-              <TrendingUp className="h-4 w-4 mr-2" /> Place Bid
-            </Button>
+            <PlaceBidButton item={item} />
           ) : (
             <Button variant="default">
               <ShoppingCart className="h-4 w-4 mr-2" /> Buy Now

@@ -1,19 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  BadgeCheck,
-  Calendar,
-  Leaf,
-  Package,
-  ShoppingCart,
-  Star,
-  TrendingUp,
-} from "lucide-react";
-import Image from "next/image";
+import { Leaf, Package } from "lucide-react";
 import { useState } from "react";
 import AuctionCard from "./AuctionCard";
 
@@ -121,7 +110,7 @@ const AswennaMarketplace = () => {
 
       {/* Add Listing Button */}
       <div className="fixed bottom-6 right-6">
-        <Button size="lg" variant="" className="rounded-full shadow-lg">
+        <Button size="lg" variant="default" className="rounded-full shadow-lg">
           <span className="text-2xl">+</span> Add Listing
         </Button>
       </div>

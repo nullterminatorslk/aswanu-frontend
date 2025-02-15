@@ -1,9 +1,183 @@
-import { FC } from "react";
+"use client";
 
-type PageProps = {};
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ShoppingCart, Tractor } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
-const Page: FC<PageProps> = ({}) => {
-  return <div></div>;
+// Define the validation schema
+const registrationSchema = z.object({
+  role: z.enum(["farmer", "buyer"], { message: "Please select a role" }),
+  name: z.string().min(2, "Name is required"),
+  email: z.string().email("Invalid email"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
+
+type RegistrationFormValues = z.infer<typeof registrationSchema>;
+
+const RegistrationPage = () => {
+  const [step, setStep] = useState(1);
+  const form = useForm<RegistrationFormValues>({
+    resolver: zodResolver(registrationSchema),
+    defaultValues: {
+      role: undefined,
+      name: "",
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = (values: RegistrationFormValues) => {
+    console.log("Registration Successful:", values);
+    alert("Registration Successful! 🎉");
+  };
+
+  return (
+    <div className="flex h-screen">
+      {/* Left Side - Image */}
+      <div className="hidden md:flex w-full max-w-[50%] relative  bg-gray-100">
+        <Image
+          src="https://picsum.photos/200/300" // Replace with your actual image
+          alt="Harvest Image"
+          className="w-full h-full object-cover"
+          fill
+        />
+      </div>
+
+      {/* Right Side - Registration Form */}
+      <div className="w-full flex items-center justify-center p-6">
+        {step === 1 ? (
+          // Step 1: Choose Role
+          <div className="space-y-6">
+            <h2 className="text-2xl font-semibold text-center">Join As</h2>
+            <p className="text-gray-500 text-center">
+              Are you a farmer or a buyer?
+            </p>
+
+            <div className="flex gap-4">
+              <Button
+                size="lg"
+                variant={
+                  form.watch("role") === "farmer" ? "default" : "outline"
+                }
+                className="w-full flex items-center gap-2"
+                onClick={() => form.setValue("role", "farmer")}
+              >
+                <Tractor className="h-5 w-5" />
+                Farmer
+              </Button>
+
+              <Button
+                size="lg"
+                variant={form.watch("role") === "buyer" ? "default" : "outline"}
+                className="w-full flex items-center gap-2"
+                onClick={() => form.setValue("role", "buyer")}
+              >
+                <ShoppingCart className="h-5 w-5" />
+                Buyer
+              </Button>
+            </div>
+
+            <Button
+              variant="default"
+              size="lg"
+              className="w-full"
+              disabled={!form.watch("role")}
+              onClick={() => setStep(2)}
+            >
+              Next
+            </Button>
+          </div>
+        ) : (
+          // Step 2: Enter Details
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-4 w-full max-w-screen-sm"
+            >
+              <h2 className="text-2xl font-semibold text-center">
+                Register as a {form.watch("role")}
+              </h2>
+              <p className="text-gray-500 text-center">
+                Fill in your details to continue.
+              </p>
+
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="email"
+                        placeholder="Enter your email"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="Enter your password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="flex justify-between">
+                <Button size="lg" variant="outline" onClick={() => setStep(1)}>
+                  Back
+                </Button>
+                <Button size="lg" type="submit" variant="default">
+                  Register
+                </Button>
+              </div>
+            </form>
+          </Form>
+        )}
+      </div>
+    </div>
+  );
 };
 
-export default Page;
+export default RegistrationPage;
