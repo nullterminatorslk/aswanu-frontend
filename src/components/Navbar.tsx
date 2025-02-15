@@ -51,7 +51,7 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="place-self-end flex gap-3">
-                <Link href="/login">
+                <Link href="/dashboard">
                   <Button size="lg" variant="ghost" tabIndex={2}>
                     Dashboard
                   </Button>
