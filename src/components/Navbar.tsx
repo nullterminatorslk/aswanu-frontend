@@ -2,19 +2,18 @@
 
 import logo from "@/assets/images/logo.png";
 import { DesktopView, MobileView } from "@/hooks/useMobile";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import MobileNavbar from "./MobileNavbar";
 import { Button } from "./ui/button";
-import { useCurrentFocusedSection } from "@/providers/CurrentFocusedSectionProvider";
-import { cn } from "@/lib/utils";
 
 const links = [
   { id: "home", text: "Home", link: "/" },
   { id: "weather", text: "Weather Forecast", link: "/weather" },
   { id: "market", text: "Our Market", link: "/market" },
   { id: "forum", text: "Forum", link: "/" },
-  { id: "contact", text: "Contact Us", link: "/#contact" },
+  { id: "chat", text: "Chat with AI", link: "/chat" },
 ];
 
 const Navbar = () => {

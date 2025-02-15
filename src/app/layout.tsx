@@ -54,7 +54,7 @@ export default async function RootLayout({
             <Navbar />
 
             <div className="min-h-screen">{children}</div>
-            <ChatBot />
+
             <Footer />
           </CurrentFocusedSectionProvider>
 
