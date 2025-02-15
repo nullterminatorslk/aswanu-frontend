@@ -29,7 +29,7 @@ const AswennaMarketplace = () => {
     {
       id: 2,
       type: "harvest",
-      category: "available",
+      category: "future",
       seller: "Malini Silva",
       title: "Fresh Vegetables",
       quantity: "500kg",
@@ -54,7 +54,7 @@ const AswennaMarketplace = () => {
     },
     {
       id: 4,
-      type: "equipment",
+      type: "harvest",
       seller: "Farm Supplies Ltd",
       title: "Organic Fertilizer",
       quantity: "50kg bags",

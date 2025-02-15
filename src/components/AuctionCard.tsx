@@ -1,10 +1,20 @@
-import { BadgeCheck, Calendar, ShoppingCart, Star } from "lucide-react";
+import { useToggle } from "@/hooks/useToggle";
+import {
+  BadgeCheck,
+  Calendar,
+  ShoppingCart,
+  Star,
+  TrendingUp,
+} from "lucide-react";
 import Image from "next/image";
 import { FC } from "react";
 import PlaceBidButton from "./PlaceBidModal";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Separator } from "./ui/separator";
+import ProductDetails from "./ProductDetailsModal";
+import { ScrollArea } from "./ui/scroll-area";
 
 export type ListingItem = {
   id: number;
@@ -29,88 +39,108 @@ type AuctionCardProps = {
 };
 
 const AuctionCard: FC<AuctionCardProps> = ({ item }) => {
+  const [open, toggleOpen] = useToggle();
   return (
-    <Card className="hover:shadow-lg transition-shadow">
-      <CardContent className="p-4">
-        <Image
-          width={300}
-          height={100}
-          src={"https://picsum.photos/200/300"}
-          alt={item.title}
-          className="w-full h-48 object-cover rounded mb-4"
-        />
+    <>
+      <Card className="hover:shadow-lg transition-shadow">
+        <CardContent className="p-4">
+          <Image
+            width={300}
+            height={100}
+            src={"https://picsum.photos/200/300"}
+            alt={item.title}
+            className="w-full h-48 object-cover rounded mb-4"
+          />
 
-        <div className="flex justify-between items-start mb-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-lg font-semibold">{item.title}</h3>
-              {item.verified && <BadgeCheck className="h-5 w-5 text-primary" />}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Seller: {item.seller}
-            </div>
-            <div className="flex items-center gap-1 text-yellow-500">
-              <Star className="h-4 w-4 fill-current" />
-              <span>{item.rating}</span>
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Location: {item.location}
-            </div>
-          </div>
-          <div className="text-right">
-            <div className="text-sm text-muted-foreground">
-              {item.category === "future" ? "Current Bid" : "Price"}
-            </div>
-            <div className="text-lg font-bold text-primary">{item.price}</div>
-          </div>
-        </div>
-
-        {/* Harvest-specific details */}
-        {item.type === "harvest" && (
-          <div className="mb-4">
-            <div className="text-sm text-muted-foreground">Quantity</div>
-            <div className="font-medium">{item.quantity}</div>
-            {item.category === "future" && (
-              <div className="flex items-center gap-2 text-foreground mt-2">
-                <Calendar className="h-4 w-4" />
-                <span>Expected: {item.harvestDate}</span>
+          <div className="flex justify-between items-start mb-4">
+            <div onClick={toggleOpen}>
+              <div className="flex items-center gap-2">
+                <h3 className="text-lg font-semibold">{item.title}</h3>
+                {item.verified && (
+                  <BadgeCheck className="h-5 w-5 text-primary" />
+                )}
               </div>
-            )}
-          </div>
-        )}
-
-        {/* Equipment-specific details */}
-        {item.type === "equipment" && (
-          <div className="mb-4">
-            {item.condition && (
-              <div>
-                <div className="text-sm text-muted-foreground">Condition</div>
-                <div className="font-medium">{item.condition}</div>
+              <div className="text-sm text-muted-foreground">
+                Seller: {item.seller}
               </div>
-            )}
-            {item.warranty && (
-              <div className="mt-2">
-                <div className="text-sm text-muted-foreground">Warranty</div>
-                <div className="font-medium">{item.warranty}</div>
+              <div className="flex items-center gap-1 text-yellow-500">
+                <Star className="h-4 w-4 fill-current" />
+                <span>{item.rating}</span>
               </div>
-            )}
+              <div className="text-sm text-muted-foreground">
+                Location: {item.location}
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="text-sm text-muted-foreground">
+                {item.category === "future" ? "Current Bid" : "Price"}
+              </div>
+              <div className="text-lg font-bold text-primary">{item.price}</div>
+            </div>
           </div>
-        )}
 
-        <Separator className="my-4" />
-
-        <div className="flex justify-between items-center">
-          {item.category === "future" ? (
-            <PlaceBidButton item={item} />
-          ) : (
-            <Button variant="default">
-              <ShoppingCart className="h-4 w-4 mr-2" /> Buy Now
-            </Button>
+          {/* Harvest-specific details */}
+          {item.type === "harvest" && (
+            <div className="mb-4">
+              <div className="text-sm text-muted-foreground">Quantity</div>
+              <div className="font-medium">{item.quantity}</div>
+              {item.category === "future" && (
+                <div className="flex items-center gap-2 text-foreground mt-2">
+                  <Calendar className="h-4 w-4" />
+                  <span>Expected: {item.harvestDate}</span>
+                </div>
+              )}
+            </div>
           )}
-          <Button variant="outline">Contact Seller</Button>
-        </div>
-      </CardContent>
-    </Card>
+
+          {/* Equipment-specific details */}
+          {item.type === "equipment" && (
+            <div className="mb-4">
+              {item.condition && (
+                <div>
+                  <div className="text-sm text-muted-foreground">Condition</div>
+                  <div className="font-medium">{item.condition}</div>
+                </div>
+              )}
+              {item.warranty && (
+                <div className="mt-2">
+                  <div className="text-sm text-muted-foreground">Warranty</div>
+                  <div className="font-medium">{item.warranty}</div>
+                </div>
+              )}
+            </div>
+          )}
+
+          <Separator className="my-4" />
+
+          <div className="flex justify-between items-center">
+            {item.category === "future" ? (
+              <PlaceBidButton item={item}>
+                <Button variant="default" className="flex items-center gap-2">
+                  <TrendingUp className="h-4 w-4" />
+                  Place Bid
+                </Button>
+              </PlaceBidButton>
+            ) : (
+              <Button variant="default">
+                <ShoppingCart className="h-4 w-4 mr-2" /> Buy Now
+              </Button>
+            )}
+          </div>
+        </CardContent>
+        <Dialog modal open={open} onOpenChange={toggleOpen}>
+          <DialogContent className="max-w-screen-lg max-h-screen">
+            <DialogHeader>
+              <DialogTitle>Place a Bid</DialogTitle>
+            </DialogHeader>
+
+            <ScrollArea className="h-screen">
+              <ProductDetails />
+            </ScrollArea>
+          </DialogContent>
+        </Dialog>
+      </Card>
+    </>
   );
 };
 

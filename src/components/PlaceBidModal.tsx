@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -34,7 +34,13 @@ const bidSchema = z.object({
 
 type BidFormValues = z.infer<typeof bidSchema>;
 
-const PlaceBidButton = ({ item }: { item: ListingItem }) => {
+const PlaceBidButton = ({
+  item,
+  children,
+}: {
+  item: ListingItem;
+  children: ReactNode;
+}) => {
   const [open, setOpen] = useState(false);
 
   const form = useForm<BidFormValues>({
@@ -51,12 +57,7 @@ const PlaceBidButton = ({ item }: { item: ListingItem }) => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="default" className="flex items-center gap-2">
-          <TrendingUp className="h-4 w-4" />
-          Place Bid
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle>Place a Bid</DialogTitle>
@@ -74,7 +75,20 @@ const PlaceBidButton = ({ item }: { item: ListingItem }) => {
               name="bidAmount"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Bid Amount (Rs.)</FormLabel>
+                  <FormLabel>Bid Amount per Unit (Rs.)</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter amount" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="bidAmount"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Quantity in Units</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter amount" {...field} />
                   </FormControl>
