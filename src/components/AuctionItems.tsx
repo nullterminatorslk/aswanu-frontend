@@ -5,6 +5,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Leaf, Package } from "lucide-react";
 import { useState } from "react";
 import AuctionCard from "./AuctionCard";
+import NewListingModal from "./NewListingModal";
 
 const AswennaMarketplace = () => {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -109,11 +110,7 @@ const AswennaMarketplace = () => {
       </div>
 
       {/* Add Listing Button */}
-      <div className="fixed bottom-6 right-6">
-        <Button size="lg" variant="default" className="rounded-full shadow-lg">
-          <span className="text-2xl">+</span> Add Listing
-        </Button>
-      </div>
+      <NewListingModal />
     </div>
   );
 };

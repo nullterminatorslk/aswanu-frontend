@@ -37,11 +37,7 @@ const ProductDetails = () => {
     harvestDate: "March 2025",
     description:
       "High-quality organic rice harvest from our family farm. We use traditional farming methods combined with modern organic practices. Perfect for both retail and wholesale buyers.",
-    images: [
-      "/api/placeholder/600/400",
-      "/api/placeholder/600/400",
-      "/api/placeholder/600/400",
-    ],
+    images: ["/food5.jpeg", "/food6.jpeg", "/food7.jpg"],
     specifications: [
       { label: "Variety", value: "Nadu" },
       { label: "Farming Method", value: "Organic" },
@@ -67,7 +63,7 @@ const ProductDetails = () => {
             <img
               src={product.images[selectedImage]}
               alt={product.title}
-              className="w-full rounded-lg object-cover"
+              className="w-full h-64 rounded-lg object-cover"
             />
           </div>
 

@@ -11,15 +11,13 @@ import { cn } from "@/lib/utils";
 
 const links = [
   { id: "home", text: "Home", link: "/" },
-  { id: "about", text: "About Us", link: "/#about" },
+  { id: "weather", text: "Weather Forecast", link: "/weather" },
   { id: "market", text: "Our Market", link: "/market" },
   { id: "forum", text: "Forum", link: "/" },
   { id: "contact", text: "Contact Us", link: "/#contact" },
 ];
 
 const Navbar = () => {
-  const { currentSection } = useCurrentFocusedSection();
-
   const isLogged = localStorage.getItem("loggedIn") === "true";
 
   return (
@@ -41,37 +39,49 @@ const Navbar = () => {
           </MobileView>
 
           <DesktopView>
-            <div className="place-self-end flex gap-3">
-              <Link href="/login">
-                <Button size="lg" variant="ghost" tabIndex={2}>
-                  Login
-                </Button>
-              </Link>
-              <Link href="/signup">
-                <Button size="lg">Sign Up</Button>
-              </Link>
-            </div>
+            {!isLogged ? (
+              <div className="place-self-end flex gap-3">
+                <Link href="/login">
+                  <Button size="lg" variant="ghost" tabIndex={2}>
+                    Login
+                  </Button>
+                </Link>
+                <Link href="/signup">
+                  <Button size="lg">Sign Up</Button>
+                </Link>
+              </div>
+            ) : (
+              <div className="place-self-end flex gap-3">
+                <Link href="/login">
+                  <Button size="lg" variant="ghost" tabIndex={2}>
+                    Dashboard
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      localStorage.clear();
+                      window.location.reload();
+                    }}
+                    size="lg"
+                    variant="ghost"
+                    tabIndex={2}
+                  >
+                    Logout
+                  </Button>
+                </Link>
+              </div>
+            )}
             <ul className="flex justify-evenly w-full max-w-screen-md mx-auto items-center tablet:col-span-full desktop:col-[2/3] desktop:row-[1/1] gap-2">
               {links.map((link) => {
-                const isFocused = currentSection === link.id;
-
                 return (
                   <li
                     key={link.text}
                     className={cn(
-                      "text-center hover:text-primary font-semibold flex flex-col items-center relative",
-                      isFocused && "text-primary"
+                      "text-center hover:text-primary font-semibold flex flex-col items-center relative"
                     )}
                   >
                     <Link href={link.link} tabIndex={1}>
                       {link.text}
                     </Link>
-                    <div
-                      className={cn(
-                        "size-2 mt-1 bg-primary absolute top-full rounded-full opacity-0 transition-opacity",
-                        isFocused && "opacity-100"
-                      )}
-                    ></div>
                   </li>
                 );
               })}

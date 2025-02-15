@@ -1,3 +1,4 @@
+import Pricing from "@/components/Pricing";
 import AboutSection from "@/components/sections/AboutSection";
 import ContactSection from "@/components/sections/ContactSection";
 import FAQSection from "@/components/sections/FAQSection";
@@ -9,6 +10,8 @@ export default function Home() {
       <AboutSection />
 
       <FAQSection />
+
+      <Pricing />
 
       <ContactSection />
     </main>

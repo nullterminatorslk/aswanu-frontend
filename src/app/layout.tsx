@@ -7,6 +7,7 @@ import DeviceProvider from "@/providers/DeviceProvider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const font = Inter({ subsets: ["latin-ext"] });
 
@@ -50,9 +51,26 @@ export default async function RootLayout({
         <DeviceProvider isMobile={isMobile}>
           <CurrentFocusedSectionProvider>
             <Navbar />
-            {children}
+
+            <div className="min-h-screen">{children}</div>
             <Footer />
           </CurrentFocusedSectionProvider>
+
+          <Script
+            id="google-translate"
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          ></Script>
+
+          <div id="google_translate_element"></div>
+
+          <script defer>
+            {`function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      { pageLanguage: 'en', includedLanguages: 'fr,de,es,zh', layout: google.translate.TranslateElement.InlineLayout.SIMPLE },
+      'google_translate_element'
+    );
+  }`}
+          </script>
         </DeviceProvider>
       </body>
     </html>
