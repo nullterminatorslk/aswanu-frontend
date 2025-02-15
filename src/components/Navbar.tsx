@@ -40,10 +40,14 @@ const Navbar = () => {
 
           <DesktopView>
             <div className="place-self-end flex gap-3">
-              <Button size="lg" variant="ghost" tabIndex={2}>
-                Login
-              </Button>
-              <Button size="lg">Sign Up</Button>
+              <Link href="/login">
+                <Button size="lg" variant="ghost" tabIndex={2}>
+                  Login
+                </Button>
+              </Link>
+              <Link href="/signup">
+                <Button size="lg">Sign Up</Button>
+              </Link>
             </div>
             <ul className="flex justify-evenly w-full max-w-screen-md mx-auto items-center tablet:col-span-full desktop:col-[2/3] desktop:row-[1/1] gap-2">
               {links.map((link) => {
