@@ -11,10 +11,10 @@ import { cn } from "@/lib/utils";
 
 const links = [
   { id: "home", text: "Home", link: "/" },
-  { id: "about", text: "About Us", link: "#about" },
+  { id: "about", text: "About Us", link: "/#about" },
   { id: "market", text: "Our Market", link: "/market" },
   { id: "faq", text: "FAQ", link: "#faq" },
-  { id: "contact", text: "Contact Us", link: "#contact" },
+  { id: "contact", text: "Contact Us", link: "/#contact" },
 ];
 
 const Navbar = () => {

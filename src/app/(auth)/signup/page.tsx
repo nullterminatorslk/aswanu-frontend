@@ -7,6 +7,7 @@ import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ShoppingCart, Tractor } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -34,9 +35,9 @@ const RegistrationPage = () => {
   });
 
   const onSubmit = (values: RegistrationFormValues) => {
-    console.log("Registration Successful:", values);
-    alert("Registration Successful! 🎉");
+    router.push("/market");
   };
+  const router = useRouter();
 
   const role = form.watch("role");
 

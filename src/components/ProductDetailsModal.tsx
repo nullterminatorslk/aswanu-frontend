@@ -273,18 +273,6 @@ const ProductDetails = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-2">
-                    <button className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 flex items-center justify-center gap-2">
-                      <MessageCircle className="h-5 w-5" />
-                      Chat
-                    </button>
-                    <button className="p-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-50">
-                      <Phone className="h-5 w-5" />
-                    </button>
-                    <button className="p-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-50">
-                      <Mail className="h-5 w-5" />
-                    </button>
-                  </div>
                 </div>
               </div>
             </CardContent>
