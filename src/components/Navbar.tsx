@@ -13,7 +13,7 @@ const links = [
   { id: "home", text: "Home", link: "/" },
   { id: "about", text: "About Us", link: "/#about" },
   { id: "market", text: "Our Market", link: "/market" },
-  { id: "faq", text: "FAQ", link: "#faq" },
+  { id: "forum", text: "Forum", link: "/" },
   { id: "contact", text: "Contact Us", link: "/#contact" },
 ];
 

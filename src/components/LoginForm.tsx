@@ -38,7 +38,7 @@ export function LoginForm({
           <Input id="password" type="password" required />
         </div>
         <Button
-          onClick={() => router.push("/market")}
+          onClick={() => router.push("/dashboard")}
           type="submit"
           className="w-full"
         >
