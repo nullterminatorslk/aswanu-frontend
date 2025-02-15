@@ -1,4 +1,9 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   BadgeCheck,
   Calendar,
@@ -8,7 +13,9 @@ import {
   Star,
   TrendingUp,
 } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
+import AuctionCard from "./AuctionCard";
 
 const AswennaMarketplace = () => {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -71,82 +78,34 @@ const AswennaMarketplace = () => {
   ];
 
   return (
-    <div className="p-4 max-w-6xl mx-auto">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-2">Aswenna Marketplace</h1>
+    <div className="p-6 max-w-6xl mx-auto">
+      <h1 className="text-4xl font-bold mb-4">Aswenna Marketplace</h1>
 
-        {/* Main Category Tabs */}
-        <div className="flex gap-4 mb-4">
-          <button
-            className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
-              activeType === "all" ? "bg-blue-500 text-white" : "bg-gray-100"
-            }`}
-            onClick={() => setActiveType("all")}
-          >
-            <span>All Items</span>
-          </button>
-          <button
-            className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
-              activeType === "harvest"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-100"
-            }`}
-            onClick={() => setActiveType("harvest")}
-          >
-            <Leaf className="h-4 w-4" />
-            <span>Harvests</span>
-          </button>
-          <button
-            className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
-              activeType === "equipment"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-100"
-            }`}
-            onClick={() => setActiveType("equipment")}
-          >
-            <Package className="h-4 w-4" />
-            <span>Equipment & Tools</span>
-          </button>
-        </div>
+      {/* Main Category Tabs */}
+      <Tabs defaultValue="all" onValueChange={setActiveType}>
+        <TabsList className="mb-4">
+          <TabsTrigger value="all">All Items</TabsTrigger>
+          <TabsTrigger value="harvest">
+            <Leaf className="h-4 w-4 mr-2" /> Harvests
+          </TabsTrigger>
+          <TabsTrigger value="equipment">
+            <Package className="h-4 w-4 mr-2" /> Equipment & Tools
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
 
-        {/* Subcategory Tabs (shown only for harvests) */}
-        {(activeType === "harvest" || activeType === "all") && (
-          <div className="flex gap-4 mb-4">
-            <button
-              className={`px-4 py-2 rounded-lg ${
-                activeCategory === "all"
-                  ? "bg-green-500 text-white"
-                  : "bg-gray-100"
-              }`}
-              onClick={() => setActiveCategory("all")}
-            >
-              All Harvests
-            </button>
-            <button
-              className={`px-4 py-2 rounded-lg ${
-                activeCategory === "future"
-                  ? "bg-green-500 text-white"
-                  : "bg-gray-100"
-              }`}
-              onClick={() => setActiveCategory("future")}
-            >
-              Future Harvests
-            </button>
-            <button
-              className={`px-4 py-2 rounded-lg ${
-                activeCategory === "available"
-                  ? "bg-green-500 text-white"
-                  : "bg-gray-100"
-              }`}
-              onClick={() => setActiveCategory("available")}
-            >
-              Available Now
-            </button>
-          </div>
-        )}
-      </div>
+      {/* Subcategory Tabs (only for harvests) */}
+      {(activeType === "harvest" || activeType === "all") && (
+        <Tabs defaultValue="all" onValueChange={setActiveCategory}>
+          <TabsList className="mb-4">
+            <TabsTrigger value="all">All Harvests</TabsTrigger>
+            <TabsTrigger value="future">Future Harvests</TabsTrigger>
+            <TabsTrigger value="available">Available Now</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {listings
           .filter((item) => activeType === "all" || item.type === activeType)
           .filter(
@@ -156,102 +115,15 @@ const AswennaMarketplace = () => {
               item.category === activeCategory
           )
           .map((item) => (
-            <Card key={item.id} className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-4">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-40 object-cover rounded-lg mb-4"
-                />
-
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-lg font-semibold">{item.title}</h3>
-                      {item.verified && (
-                        <BadgeCheck className="h-5 w-5 text-blue-500" />
-                      )}
-                    </div>
-                    <div className="text-sm text-gray-500">
-                      Seller: {item.seller}
-                    </div>
-                    <div className="flex items-center gap-1 text-yellow-500">
-                      <Star className="h-4 w-4 fill-current" />
-                      <span>{item.rating}</span>
-                    </div>
-                    <div className="text-sm text-gray-500">
-                      Location: {item.location}
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-sm text-gray-500">
-                      {item.category === "future" ? "Current Bid" : "Price"}
-                    </div>
-                    <div className="text-lg font-bold text-green-600">
-                      {item.price}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Harvest-specific details */}
-                {item.type === "harvest" && (
-                  <div className="mb-4">
-                    <div className="text-sm text-gray-500">Quantity</div>
-                    <div className="font-medium">{item.quantity}</div>
-                    {item.category === "future" && (
-                      <div className="flex items-center gap-2 text-orange-500 mt-2">
-                        <Calendar className="h-4 w-4" />
-                        <span>Expected: {item.harvestDate}</span>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Equipment-specific details */}
-                {item.type === "equipment" && (
-                  <div className="mb-4">
-                    {item.condition && (
-                      <div>
-                        <div className="text-sm text-gray-500">Condition</div>
-                        <div className="font-medium">{item.condition}</div>
-                      </div>
-                    )}
-                    {item.warranty && (
-                      <div className="mt-2">
-                        <div className="text-sm text-gray-500">Warranty</div>
-                        <div className="font-medium">{item.warranty}</div>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                <div className="flex justify-between items-center">
-                  {item.category === "future" ? (
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2">
-                      <TrendingUp className="h-4 w-4" />
-                      Place Bid
-                    </button>
-                  ) : (
-                    <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center gap-2">
-                      <ShoppingCart className="h-4 w-4" />
-                      Buy Now
-                    </button>
-                  )}
-                  <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-                    Contact Seller
-                  </button>
-                </div>
-              </CardContent>
-            </Card>
+            <AuctionCard item={item} key={item.id} />
           ))}
       </div>
 
       {/* Add Listing Button */}
       <div className="fixed bottom-6 right-6">
-        <button className="px-6 py-3 bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 flex items-center gap-2">
-          <span className="text-2xl">+</span>
-          Add Listing
-        </button>
+        <Button size="lg" variant="" className="rounded-full shadow-lg">
+          <span className="text-2xl">+</span> Add Listing
+        </Button>
       </div>
     </div>
   );
