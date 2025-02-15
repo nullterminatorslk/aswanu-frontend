@@ -12,7 +12,7 @@ const links = [
   { id: "home", text: "Home", link: "/" },
   { id: "weather", text: "Weather Forecast", link: "/weather" },
   { id: "market", text: "Our Market", link: "/market" },
-  { id: "forum", text: "Forum", link: "/" },
+  { id: "forum", text: "Forum", link: "https://govimithuru.cyextech.com/" },
   { id: "chat", text: "Chat with AI", link: "/chat" },
 ];
 
