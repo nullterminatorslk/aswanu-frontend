@@ -24,7 +24,7 @@ const AswennaMarketplace = () => {
       verified: true,
       rating: 4.8,
       location: "Anuradhapura",
-      image: "/api/placeholder/200/150",
+      image: "/food5.jpeg",
     },
     {
       id: 2,
@@ -37,7 +37,7 @@ const AswennaMarketplace = () => {
       verified: true,
       rating: 4.5,
       location: "Dambulla",
-      image: "/api/placeholder/200/150",
+      image: "/food4.jpeg",
     },
     {
       id: 3,
@@ -50,7 +50,7 @@ const AswennaMarketplace = () => {
       rating: 4.9,
       location: "Colombo",
       warranty: "2 years",
-      image: "/api/placeholder/200/150",
+      image: "/food3.jpeg",
     },
     {
       id: 4,
@@ -62,7 +62,7 @@ const AswennaMarketplace = () => {
       verified: true,
       rating: 4.7,
       location: "Kandy",
-      image: "/api/placeholder/200/150",
+      image: "/food2.jpeg",
     },
   ];
 

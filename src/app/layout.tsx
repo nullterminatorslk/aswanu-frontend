@@ -11,9 +11,9 @@ import "./globals.css";
 const font = Inter({ subsets: ["latin-ext"] });
 
 export const metadata: Metadata = {
-  title: "Laundryland",
+  title: "Aswanna",
   description:
-    "Laundryland (Pvt) Ltd is Sri Lanka's premier laundry service, dedicated to providing exceptional care for your garments. With our 24/7 availability and fast turnaround times, we offer a hassle-free laundry experience like no other.",
+    "  Aswanna is a revolutionary auction platform that empowers vegetable farmers to connect directly with wholesale buyers, ensuring fair prices and efficient distribution. Discover fresh, locally sourced produce and support sustainable agriculture.",
   icons: [
     {
       rel: "apple-touch-icon",

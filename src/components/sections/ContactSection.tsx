@@ -62,18 +62,18 @@ const ContactSection = () => {
               Help:{" "}
               <a
                 className="hover:text-primary hover:underline"
-                href="mailto:hello@laundryland.lk"
+                href="mailto:hello@aswenna.lk"
               >
-                hello@laundryland.lk
+                hello@aswenna.lk
               </a>
             </p>
             <p>
               Contact:{" "}
               <a
                 className="hover:text-primary hover:underline"
-                href="mailto:hello@laundryland.lk"
+                href="mailto:hello@aswenna.lk"
               >
-                hello@laundryland.lk
+                hello@aswenna.lk
               </a>
             </p>
           </ContactCard>

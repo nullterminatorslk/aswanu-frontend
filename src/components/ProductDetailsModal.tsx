@@ -245,7 +245,7 @@ const ProductDetails = () => {
             <CardContent>
               <div className="flex items-start gap-4">
                 <img
-                  src={product.sellerInfo.image}
+                  src={"https://picsum.photos/200"}
                   alt={product.seller}
                   className="w-16 h-16 rounded-full object-cover"
                 />

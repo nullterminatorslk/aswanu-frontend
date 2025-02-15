@@ -32,7 +32,7 @@ const MobileNavbar = ({
               <div className="flex justify-between items-center px-5 py-4">
                 <Image
                   src={logo}
-                  alt="Laundry Land Logo"
+                  alt="Aswanna Logo"
                   className="flex-shrink-0"
                   width={170}
                   height={48}

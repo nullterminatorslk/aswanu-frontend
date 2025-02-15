@@ -38,7 +38,10 @@ export function LoginForm({
           <Input id="password" type="password" required />
         </div>
         <Button
-          onClick={() => router.push("/dashboard")}
+          onClick={() => {
+            localStorage.setItem("loggedIn", "true");
+            window.location.href = "/dashboard";
+          }}
           type="submit"
           className="w-full"
         >

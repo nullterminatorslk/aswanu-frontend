@@ -44,12 +44,12 @@ const Footer = () => {
             </div>
           </div>
           <div className="desktop:col-start-1">
-            &copy; {year} Laundryland. All Rights Reserved.
+            &copy; {year} Aswanna. All Rights Reserved.
           </div>
           <div className="desktop:col-start-2">
             <Image
               src={logo}
-              alt="Laundry Land Logo"
+              alt="Aswanna Logo"
               className="flex-shrink-0"
               width={170}
               height={48}

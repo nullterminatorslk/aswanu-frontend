@@ -20,6 +20,8 @@ const links = [
 const Navbar = () => {
   const { currentSection } = useCurrentFocusedSection();
 
+  const isLogged = localStorage.getItem("loggedIn") === "true";
+
   return (
     <div className="sticky top-0 z-40 pb-8">
       <div className="bg-white">
@@ -27,7 +29,7 @@ const Navbar = () => {
           <Link href={"/"}>
             <Image
               src={logo}
-              alt="Laundry Land Logo"
+              alt="Aswanna Logo"
               className="flex-shrink-0"
               width={170}
               height={48}

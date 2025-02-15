@@ -44,16 +44,16 @@ const AuctionCard: FC<AuctionCardProps> = ({ item }) => {
     <>
       <Card className="hover:shadow-lg transition-shadow">
         <CardContent className="p-4">
-          <Image
+          <img
             width={300}
             height={100}
-            src={"https://picsum.photos/200/300"}
+            src={item.image}
             alt={item.title}
             className="w-full h-48 object-cover rounded mb-4"
           />
 
           <div className="flex justify-between items-start mb-4">
-            <div onClick={toggleOpen}>
+            <div onClick={toggleOpen} className="cursor-pointer">
               <div className="flex items-center gap-2">
                 <h3 className="text-lg font-semibold">{item.title}</h3>
                 {item.verified && (
