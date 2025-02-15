@@ -13,7 +13,7 @@ const links = [
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <footer className="py-10">
+    <footer>
       <div className="border-t px-5">
         <nav aria-label="Footer Navigation" className="my-6">
           <ul className="flex flex-col tablet:flex-row justify-center w-full max-w-screen-md mx-auto items-center tablet:gap-10 gap-5">

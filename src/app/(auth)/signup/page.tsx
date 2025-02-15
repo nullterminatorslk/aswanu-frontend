@@ -45,9 +45,8 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div className="flex h-screen">
-      {/* Left Side - Image */}
-      <div className="hidden md:flex w-full max-w-[50%] relative  bg-gray-100">
+    <div className="grid min-h-svh lg:grid-cols-2">
+      <div className="relative hidden bg-muted lg:block">
         <Image
           src="https://picsum.photos/200/300" // Replace with your actual image
           alt="Harvest Image"
@@ -55,126 +54,127 @@ const RegistrationPage = () => {
           fill
         />
       </div>
+      <div className="flex flex-col gap-4 p-6 md:p-10">
+        <div className="flex flex-1 items-center justify-center">
+          <div className="w-full max-w-xs">
+            {step === 1 ? (
+              // Step 1: Choose Role
+              <div className="space-y-6">
+                <h2 className="text-2xl font-semibold text-center">Join As</h2>
+                <p className="text-gray-500 text-center">
+                  Are you a farmer or a buyer?
+                </p>
 
-      {/* Right Side - Registration Form */}
-      <div className="w-full flex items-center justify-center p-6">
-        {step === 1 ? (
-          // Step 1: Choose Role
-          <div className="space-y-6">
-            <h2 className="text-2xl font-semibold text-center">Join As</h2>
-            <p className="text-gray-500 text-center">
-              Are you a farmer or a buyer?
-            </p>
+                <div className="flex gap-4">
+                  <Button
+                    variant={
+                      form.watch("role") === "farmer" ? "default" : "outline"
+                    }
+                    className="w-full flex items-center gap-2"
+                    onClick={() => form.setValue("role", "farmer")}
+                  >
+                    <Tractor className="h-5 w-5" />
+                    Farmer
+                  </Button>
 
-            <div className="flex gap-4">
-              <Button
-                size="lg"
-                variant={
-                  form.watch("role") === "farmer" ? "default" : "outline"
-                }
-                className="w-full flex items-center gap-2"
-                onClick={() => form.setValue("role", "farmer")}
-              >
-                <Tractor className="h-5 w-5" />
-                Farmer
-              </Button>
+                  <Button
+                    variant={
+                      form.watch("role") === "buyer" ? "default" : "outline"
+                    }
+                    className="w-full flex items-center gap-2"
+                    onClick={() => form.setValue("role", "buyer")}
+                  >
+                    <ShoppingCart className="h-5 w-5" />
+                    Buyer
+                  </Button>
+                </div>
 
-              <Button
-                size="lg"
-                variant={form.watch("role") === "buyer" ? "default" : "outline"}
-                className="w-full flex items-center gap-2"
-                onClick={() => form.setValue("role", "buyer")}
-              >
-                <ShoppingCart className="h-5 w-5" />
-                Buyer
-              </Button>
-            </div>
-
-            <Button
-              variant="default"
-              size="lg"
-              className="w-full"
-              disabled={!form.watch("role")}
-              onClick={() => setStep(2)}
-            >
-              Next
-            </Button>
-          </div>
-        ) : (
-          // Step 2: Enter Details
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-4 w-full max-w-screen-sm"
-            >
-              <h2 className="text-2xl font-semibold text-center">
-                Register as a {form.watch("role")}
-              </h2>
-              <p className="text-gray-500 text-center">
-                Fill in your details to continue.
-              </p>
-
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="Enter your email"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="Enter your password"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <div className="flex justify-between">
-                <Button size="lg" variant="outline" onClick={() => setStep(1)}>
-                  Back
-                </Button>
-                <Button size="lg" type="submit" variant="default">
-                  Register
+                <Button
+                  variant="default"
+                  className="w-full"
+                  disabled={!form.watch("role")}
+                  onClick={() => setStep(2)}
+                >
+                  Next
                 </Button>
               </div>
-            </form>
-          </Form>
-        )}
+            ) : (
+              // Step 2: Enter Details
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-4 w-full max-w-xs"
+                >
+                  <h2 className="text-2xl font-semibold text-center">
+                    Register as a {form.watch("role")}
+                  </h2>
+                  <p className="text-gray-500 text-center">
+                    Fill in your details to continue.
+                  </p>
+
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter your name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="email"
+                            placeholder="Enter your email"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Password</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="password"
+                            placeholder="Enter your password"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className="flex justify-between">
+                    <Button variant="outline" onClick={() => setStep(1)}>
+                      Back
+                    </Button>
+                    <Button type="submit" variant="default">
+                      Register
+                    </Button>
+                  </div>
+                </form>
+              </Form>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
