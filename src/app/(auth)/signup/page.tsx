@@ -44,11 +44,10 @@ const RegistrationPage = () => {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="relative hidden bg-muted lg:block">
-        <Image
-          src="https://picsum.photos/200/300" // Replace with your actual image
+        <img
+          src="https://www.shutterstock.com/image-photo/blurred-image-farmers-use-tablets-600nw-2328625639.jpg" // Replace with your actual image
           alt="Harvest Image"
-          className="w-full h-full object-cover"
-          fill
+          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />
       </div>
       <div className="flex flex-col gap-4 p-6 md:p-10">

@@ -185,7 +185,7 @@ const Weather = () => {
                   id="myiframe"
                   width="100%"
                   height="525"
-                  src={`https://embed.windy.com/embed2.html?lat=${weather.city.coord.lat}&amp;lon=${weather.city.coord.lon}&amp;detailLat=${weather.city.coord.lat}&amp;detailLon=${weather.city.coord.lon}&amp;zoom=11&amp;level=surface&amp;overlay=rain&amp;product=ecmwf&amp;menu=&amp;message=&amp;marker=true&amp;calendar=now&amp;pressure=&amp;type=map&amp;location=coordinates&amp;detail=&amp;metricWind=default&amp;metricTemp=default&amp;radarRange=-1`}
+                  src="https://embed.windy.com/embed2.html?lat=6.1609&amp;lon=80.69817600&amp;detailLat=6.1609&amp;detailLon=80.69817600&amp;zoom=11&amp;level=surface&amp;overlay=rain&amp;product=ecmwf&amp;menu=&amp;message=&amp;marker=true&amp;calendar=now&amp;pressure=&amp;type=map&amp;location=coordinates&amp;detail=&amp;metricWind=default&amp;metricTemp=default&amp;radarRange=-1"
                   frameBorder="0"
                 ></iframe>
               </div>
